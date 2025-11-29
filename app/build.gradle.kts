@@ -42,6 +42,10 @@ android {
 }
 
 dependencies {
+
+    // Icon
+    implementation("androidx.compose.material:material-icons-extended:1.5.0")
+
     //viewmodel dependencies
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")  // For core ViewModel
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")  // For StateFlow integration
