@@ -26,41 +26,18 @@ import com.example.findmylocation.ui.theme.FindMyLocationTheme
 class MainActivity : ComponentActivity() {
   private val viewModel: FindMyLocationViewModel by viewModels()
 
-//    val locationPermissionLauncher = registerForActivityResult(
-//        ActivityResultContracts.RequestPermission()
-//    ) { isGranted: Boolean ->
-//        if (isGranted) {
-//            // Permission was granted → get location again
-//            viewModel.loadLocation(this@MainActivity)
-//        }
-//        // if denied → UI stays on PermissionRequired, user can tap again
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             val location = rememberLocationHandler()
             val state by location.uiState.collectAsState()
 
             FindMyLocationTheme {
                 val context = LocalContext.current
 
-                // 2. Create ViewModel inside setContent (exactly like you already have)
-//                val viewModel: FindMyLocationViewModel = viewModel()
-
-//                LaunchedEffect(Unit) {
-//                    viewModel.loadLocation(context)
-//                }
-//                val locationUIState by viewModel.uiState.collectAsState()
-
-//                val onCheckPermission = {
-//                    viewModel.loadLocation(context)
-//                }
-
                 FindMyLocationScreen(
-                    context = context,
+                    //context = context,
                     locationUIState = state,
                    // onCheckPermission = onCheckPermission,
                     onRequestPermission = location.requestPermission,
@@ -70,21 +47,5 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FindMyLocationTheme {
-        Greeting("Android")
     }
 }

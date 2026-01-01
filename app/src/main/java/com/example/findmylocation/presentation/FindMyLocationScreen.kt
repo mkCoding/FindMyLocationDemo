@@ -1,13 +1,10 @@
 package com.example.findmylocation.presentation
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import android.provider.Settings
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,9 +35,7 @@ import com.example.findmylocation.locationaccess.UserLocationDetails
 
 @Composable
 fun FindMyLocationScreen(
-    context: Context,
     locationUIState: LocationUiState,
-   // onCheckPermission:() -> Unit,
     onRequestPermission: () -> Unit,
     onOpenSettings: () -> Unit,
     onRetry: () -> Unit
@@ -174,7 +169,7 @@ fun LocationField(
         fontSize = 12.sp
     )
 
-    Text(value, fontSize = 24.sp, fontWeight = FontWeight.Medium)
+    Text(value, fontSize = 24.sp, fontWeight = FontWeight.Medium, textAlign = TextAlign.Center)
 
     Spacer(modifier = Modifier.height( 16.dp))
 }
@@ -185,7 +180,7 @@ fun LocationField(
 fun FindMyLocationScreenPreview() {
     val context = LocalContext.current
     FindMyLocationScreen(
-        context = context,
+       // context = context,
         locationUIState = LocationUiState.Success(
             data = UserLocationDetails(
                 continent = "North America",
@@ -193,7 +188,7 @@ fun FindMyLocationScreenPreview() {
                 state = "GA",
                 city = "Atlanta",
                 street = "Monroe Dr",
-                fullStreet = "1445 Monroe Dr",
+                fullStreet = "7045 180th Avenue North East",
                 zip = "30324"
             )
         ),
