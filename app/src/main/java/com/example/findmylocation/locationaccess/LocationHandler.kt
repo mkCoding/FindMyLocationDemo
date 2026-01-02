@@ -35,13 +35,13 @@ fun rememberLocationHandler(
         // this callback runs when user answers the permission dialog
         if(isGranted){
             // Permission granted, and get location
-            viewModel.loadLocation(activity)
+            viewModel.loadLocation()
         }
         // if denied do nothing
     }
     // Runs only once when this composable first appears on screen
     LaunchedEffect(Unit) {
-        viewModel.loadLocation(context = context)
+        viewModel.loadLocation()
     }
 
     return remember{
@@ -54,7 +54,7 @@ fun rememberLocationHandler(
                 activity.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             },
             retry = {
-                viewModel.loadLocation(context = context)
+                viewModel.loadLocation()
             }
         )
     }

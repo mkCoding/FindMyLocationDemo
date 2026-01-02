@@ -22,30 +22,31 @@ import com.example.findmylocation.locationaccess.rememberLocationHandler
 import com.example.findmylocation.presentation.FindMyLocationScreen
 import com.example.findmylocation.presentation.FindMyLocationViewModel
 import com.example.findmylocation.ui.theme.FindMyLocationTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-  private val viewModel: FindMyLocationViewModel by viewModels()
+    private val viewModel: FindMyLocationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             val location = rememberLocationHandler()
-            val state by location.uiState.collectAsState()
+            val state by viewModel.uiState.collectAsState()  // Collect directly from ViewModel
+            val loadLocationAction = { viewModel.loadLocation() }
 
             FindMyLocationTheme {
-                val context = LocalContext.current
-
                 FindMyLocationScreen(
-                    //context = context,
-                    locationUIState = state,
-                   // onCheckPermission = onCheckPermission,
-                    onRequestPermission = location.requestPermission,
-                    onOpenSettings =location.openSettings,
-                    onRetry = location.retry
-
+                    locationUiState = state,
+                    loadLocation = loadLocationAction,
+                    onRequestPermission = location.requestPermission
                 )
             }
         }
+
+        // Trigger initial load
+        viewModel.loadLocation()
     }
 }

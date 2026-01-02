@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -50,6 +53,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")  // For core ViewModel
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")  // For StateFlow integration
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+
+    // Hilt
+    ksp("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+
 
     // required for google play
     implementation("com.google.android.gms:play-services-location:21.3.0")
