@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationDisabled
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -74,13 +77,31 @@ fun FindMyLocationScreen(
             }
             is LocationUiState.Success -> {
                 val details = locationUiState.data
-                LocationField("Continent", details.continent)
-                LocationField("Country", details.country)
-                LocationField("State", details.state)
-                LocationField("City", details.city)
-                LocationField("Street", details.street)
-                LocationField("Street Address", details.fullStreet)
-                LocationField("Zip", details.zip)
+
+                Card(
+                    modifier = Modifier
+                    .fillMaxWidth()           // Make the card expand horizontally
+                        .padding(horizontal = 16.dp),  // 16dp padding on left & right
+
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(8.dp)
+                ) {
+
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        LocationField("Continent", details.continent)
+                        LocationField("Country", details.country)
+                        LocationField("State", details.state)
+                        LocationField("City", details.city)
+                        LocationField("Street", details.street)
+                        LocationField("Street Address", details.fullStreet)
+                        LocationField("Zip", details.zip)
+                    }
+                }
+
 
 
                 Spacer(Modifier.height(24.dp))
